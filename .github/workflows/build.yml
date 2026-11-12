@@ -1,0 +1,10 @@
+name: build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup target add wasm32-unknown-unknown
+      - run: cargo install --locked stellar-cli --version 21.5.0
+      - run: cargo build --target wasm32-unknown-unknown --release
